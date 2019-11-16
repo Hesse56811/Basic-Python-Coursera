@@ -1,0 +1,41 @@
+def sorted_points(): 
+ inFile = open('input.txt', 'r', encoding='utf-8') 
+ List_usr_pnt = [] # user with points 
+ List = [] 
+ j = 0 
+ k = int(inFile.readline()) 
+ for i in inFile: 
+ List_usr_pnt.append(i.split()) 
+ first_ex = int(List_usr_pnt[j][-1]) 
+ second_ex = int(List_usr_pnt[j][-2]) 
+ third_ex = int(List_usr_pnt[j][-3]) 
+ if first_ex >= 40: 
+ if second_ex >= 40: 
+ if third_ex >= 40: 
+ List.append(first_ex + second_ex + third_ex) 
+ j += 1 
+ inFile.close() 
+ List.sort(reverse=True) 
+ Klist = [] 
+ Klist.append([k, List]) 
+ return Klist 
+ 
+ 
+def min_points(): 
+ List = sorted_points() 
+ List = List[0] 
+ K = List[0] 
+ List = List[1] 
+ MinPoints = 0 
+ if len(List) <= K: 
+ return 0 
+ elif List[0] == List[K]: 
+ return 1 
+ for i in range(K, 0, -1): 
+ if List[i] < List[i - 1]: 
+ return List[i - 1] 
+ 
+ 
+outFile = open('output.txt', 'w', encoding='utf-8') 
+print(min_points(), file=outFile) 
+outFile.close()
